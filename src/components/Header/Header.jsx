@@ -1,5 +1,6 @@
 import React from 'react';
-import avatar from './../avatar.jpg';
+import avatar from './../../avatar.jpg';
+import './Header.css'
 
 const Header = function() {
     return(

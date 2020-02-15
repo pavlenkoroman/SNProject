@@ -1,11 +1,13 @@
 import React from 'react';
-import avatar from './../avatar.jpg';
+import avatar from './../../avatar.jpg';
+import './MyProfile.css'
+import Posts from './Posts/Posts';
 
-const MyProfile = function() {
-    return(
-        <div className="my-profile">
+const MyProfile = function () {
+  return (
+    <div className="my-profile">
       <div className="user-avatar">
-        <img src={avatar} alt=""/>
+        <img src={avatar} alt="" />
         <div className="avatar-settings">
           <button className='edit'>Edit</button>
         </div>
@@ -21,31 +23,28 @@ const MyProfile = function() {
           <div className="online-offline">Online</div>
         </div>
         <div className="user-status">smart kid</div>
-        <hr/>
+        <hr />
         <div className="some-info">
           <div className='friends-info'>
             <a href="">84</a>
-            <br/>
+            <br />
             <p>friends</p>
           </div>
           <div className='followers-info'><a href="">84</a>
-            <br/>
+            <br />
             <p>followers</p></div>
           <div className='videos-info'><a href="">84</a>
-            <br/>
+            <br />
             <p>videos</p></div>
           <div className='audio-info'><a href="">84</a>
-            <br/>
+            <br />
             <p>audios</p></div>
         </div>
 
       </div>
-
-      <div className="posts">
-        posts
-      </div>
+      <Posts />
     </div>
-    );
+  );
 }
 
 export default MyProfile;
