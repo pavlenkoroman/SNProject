@@ -1,10 +1,12 @@
 .app-wrapper {
   display: grid;
-  grid-template-columns: 1fr 8fr;
+  grid-template-columns: 1.8fr 8fr;
   grid-template-rows: 60px 1fr;
-  grid-gap:1%;
 
   grid-template-areas: 
   "header header"
   "sidebar cont";
+
+  width: 60%;
+  margin: 0px auto;
 }

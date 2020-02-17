@@ -28,10 +28,9 @@
 }
 
 .my-profile {
-  width: 60%;
+  margin: 1%;
   display: grid;
   grid-template-columns: 1fr 5.5fr;
-  grid-gap: 5px;
   grid-template-areas: 
     "ua pi"
     "fl posts"
@@ -39,7 +38,6 @@
 }
 
 .user-avatar {
-  padding: 5%;
   background-color: white;
   grid-area: ua;
   display: flex;

@@ -1,9 +1,9 @@
 import React from 'react';
 import avatar from './../../avatar.jpg';
-import './MyProfile.css'
+import './Profile.css'
 import Posts from './Posts/Posts';
 
-const MyProfile = function () {
+const Profile = function () {
   return (
     <div className="my-profile">
       <div className="user-avatar">
@@ -47,4 +47,4 @@ const MyProfile = function () {
   );
 }
 
-export default MyProfile;
+export default Profile;
