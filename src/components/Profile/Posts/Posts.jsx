@@ -1,16 +1,15 @@
 import React from 'react';
-import avatar from './../../../avatar.jpg';
 import PostsModule from './Posts.module.css';
 import Post from './Post/Post';
 
-const Posts = () => {
+
+
+const Posts = (props) => {
+    let postList = props.p.map( p => <Post userName={p.name} message={p.message} likesCounter={p.likesCounter}/>)
+
     return (
         <div classname={PostsModule.posts}>
-            <Post userName='Roman Pavlenko' message="Let's do it!" likesCounter='20'/>
-            <Post userName='Anonimous' message='Hack the system!' likesCounter='10'/>
-            <Post userName='Navi fan' message='Awesome!' likesCounter='11'/>
-            <Post userName='VP fan' message='Nice avatar!' likesCounter='9'/>
-            <Post userName='ScoolBoy' message='where is my textbook?!' likesCounter='5'/>
+           {postList}
         </div>
     )
 }

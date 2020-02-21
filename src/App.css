@@ -6,7 +6,5 @@
   grid-template-areas: 
   "header header"
   "sidebar cont";
-
-  width: 60%;
   margin: 0px auto;
 }
