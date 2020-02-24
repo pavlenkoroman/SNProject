@@ -1,11 +1,12 @@
-.posts {
-    margin-top: 2%;
+.post {
+    margin: 2%;
+    width: 100%;
     -webkit-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.3);
 -moz-box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.3);
 box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.3);
 }
 
-.posts img {
+.post img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -15,19 +16,25 @@ box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.3);
     top:1px;
 }
 
-.posts .userInfo {
+.post .userInfo {
+    width: 100%;
     display: flex;
     align-items: center;
 }
 
-.posts .userInfo span {
+.post .userInfo span {
     margin-left: 2%;
 }
 
-.posts > span {
+.post > span {
     margin: 2%;
 }
 
 .text {
+    width: 100%;
     margin:1%;
+}
+
+.newPost textarea {
+    width: 900px;
 }

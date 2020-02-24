@@ -1,0 +1,23 @@
+body {
+  background-color: #edeef0;
+}
+
+.appWrapper {
+  display: grid;
+  grid-template-columns: 1.8fr 8fr;
+  grid-template-rows: 60px 1fr;
+
+  grid-template-areas: 
+  "header header"
+  "ac ac";
+  margin: 0px auto;
+}
+
+.appContent {
+  grid-area: ac;
+
+  width: 60%;
+  margin: 0px auto;
+  display: flex;
+  justify-content: flex-start;
+}

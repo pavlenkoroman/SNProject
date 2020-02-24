@@ -1,0 +1,52 @@
+.profileInfo {
+    margin: 2%;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    grid-gap: 10px;
+    width: 900px;
+}
+
+.mainItem , .extraItem{
+    height: 400px;
+    background-color: white;
+    border-radius: 1%;
+    border: 1px solid lightgray;
+}
+
+.extraItem {
+    height: 200px;
+}
+
+.avatar {
+    margin: 5.5%;
+}
+
+h1 {
+    padding :0;
+    margin: 0;
+}
+
+.pageTop {
+    margin: 2%;
+}
+
+.infoItem {
+    margin: 2%;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    color: lightgray;
+    font-size: 0.9em;
+}
+
+.infoItem a {
+    text-decoration: none;
+    color: black;
+}
+
+.infoItem a:hover {
+    text-decoration: underline;
+}

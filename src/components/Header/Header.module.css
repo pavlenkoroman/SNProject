@@ -1,0 +1,40 @@
+header {
+  width: 100%;
+  background-color: darkgrey;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  height: 45px;
+}
+
+.logo img {
+  width: 45px;
+}
+
+.logo img:hover {
+  background-color: lightgray;
+}
+
+.aboutUser a {
+  padding: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 1%;
+}
+
+.aboutUser a:hover {
+  background-color: lightgray;
+}
+
+.avatarMini img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.userName a {
+  color: black;
+  text-decoration: none;
+}
