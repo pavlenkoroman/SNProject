@@ -18,22 +18,22 @@ const ProfileInfo = () => {
           <span className={style.status}>道德經</span>
           <hr/>
           <div className={style.userInformation}>
-            <div class={style.infoItem}>
+            <div className={style.infoItem}>
               <span className={style.info}>Birthday:</span>
               <span><a href="">value</a></span>
             </div>
 
-            <div class={style.infoItem}>
+            <div className={style.infoItem}>
               <span className={style.info}>Relationship</span>
               <span><a href="">value</a></span>
             </div>
 
-            <div class={style.infoItem}>
+            <div className={style.infoItem}>
               <span className={style.info}>Company:</span>
               <span><a href="">value</a></span>
             </div>
 
-            <div class={style.infoItem}>
+            <div className={style.infoItem}>
               <span className={style.info}>Website:</span>
               <span><a href="">value</a></span>
             </div>

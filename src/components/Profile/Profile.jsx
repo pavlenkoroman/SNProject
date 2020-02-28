@@ -7,10 +7,10 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 const Profile = function (props) {
   return (
     <div className="my-profile">
-      <ProfileInfo/>
-      <Posts p={props.postsData} newPost={props.newPost}/>
+      <ProfileInfo />
+      <Posts profile={props.state.profile} 
+        dispatch={props.dispatch} />
     </div>
   );
 }
-
 export default Profile;

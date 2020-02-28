@@ -18,8 +18,12 @@ function App(props) {
 
         <div className={style.appContent}>
           <Sidebar />
-          <Route path='/profile' render={() => <Profile postsData={props.postsData} newPost={props.newPost}/>} />
-          <Route path='/messages' render={() => <Messages messagesData={props.messagesData} />} />
+          <Route path='/profile' render={() => <Profile 
+          state={props.getState}
+          dispatch={props.dispatch}/>} />
+          <Route path='/messages' render={() => <Messages
+           state={props.getState} 
+           dispatch={props.dispatch}/>} />
           <Route path='/news' render={() => <News />} />
           <Route path='/settings' render={() => <Settings />} />
         </div>

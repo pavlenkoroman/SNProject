@@ -11,8 +11,8 @@ const Header = function() {
       <textarea></textarea>
         <div className={style.aboutUser}>
           <a href="">
-            <div className={style.userName}> <a href=''> Roman Pavlenko</a></div>
-            <div className={style.avatarMini}><a href=""><img src={avatar} alt=""/></a></div>
+            <div className={style.userName}> <a href='#'> Roman Pavlenko</a></div>
+            <div className={style.avatarMini}><a href="#"><img src={avatar} alt=""/></a></div>
           </a>
         </div>
     </header>
