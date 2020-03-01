@@ -1,7 +1,11 @@
+import ProfileReducer from "./profile-reducer"
+import dialogsReducer from "./messages-reducer"
+
 const NEW_POST = "NEW-POST";
 const UPDATE_POST = "UPDATE-POST";
 const NEW_DIALOG = "NEW-DIALOG";
 const UPDATE_DIALOG = "UPDATE-DIALOG";
+
 let store = {
 
     _state: {
@@ -40,53 +44,12 @@ let store = {
         this.rerenderTree = observer;
     },
 
-    newPostText: "hi",
-
     dispatch(action) {
-        if (action.type === NEW_POST) {
-            let newData = { id: 6, name: 'Roman Pavlenko', message: action.postText, likesCounter: 20 };
-            this._state.profile.postsData.push(newData);
-            this.rerenderTree(this._state);
-        } else if (action.type === UPDATE_POST) {
-            this._state.profile.newPostText = action.newText;
-            this.rerenderTree(this._state)
-        } else if (action.type === NEW_DIALOG) {
-            let newMessagesData = { id: 6, name: 'Dave', lastMessage: action.dialogText}
-            this._state.messages.messagesData.push(newMessagesData);
-            this.rerenderTree(this._state);
-        } else if (action.type === UPDATE_DIALOG) {
-            this._state.messages.newDialogText = action.newText;
-            this.rerenderTree(this._state)
-        }
-    },
-}
-export const newPostActionCreator = (text) => {
-    return {
-        type: NEW_POST,
-        postText: text
-    };
-}
 
-export const updatePostActionCreator = (text) => {
-    return {
-        type: UPDATE_POST,
-        newText: text
-    };
-}
-
-export const newDialogActionCreator = (text) => {
-    return {
-        type: NEW_DIALOG,
-        dialogText: text
-    };
-}
-
-export const updateDialogActionCreator = (text) => {
-        return {
-            type: UPDATE_POST,
-            newText: text
-        };
+        this._state.profile = ProfileReducer(this._state.profile, action);
+        this._state.messages = dialogsReducer(this._state.messages, action)
+        this.rerenderTree(this._state);
     }
-
+}
 
 export default store;

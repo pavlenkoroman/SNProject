@@ -1,33 +1,31 @@
 import React from 'react';
 import style from './Posts.module.css';
 import Post from './Post/Post';
-import { newPostActionCreator, updatePostActionCreator } from '../../../redux/state';
+import { newPostActionCreator, updatePostActionCreator } from '../../../redux/profile-reducer';
 
 
 const Posts = (props) => {
-    let postsData = props.profile.postsData;
-    let postList =
-        postsData.map(el => <Post userName={el.name} message={el.message} likesCounter={el.likesCounter} />)
+    let postList = props.state.profile.postsData.map(el => <Post userName={el.name} message={el.message} likesCounter={el.likesCounter} />)
 
-    let link = React.createRef()
-
-    let createPost = () => {
-        let text = link.current.value;
-        props.dispatch(newPostActionCreator(text));
+    let postsLink = React.createRef()
+    
+    let onUpdatePost = () => {
+        let text = postsLink.current.value;
+        props.onPostChange(text)
     }
 
-    let onPostChange = () => {
-        let text = link.current.value;
-        props.dispatch(updatePostActionCreator(text))
+    let addPost = () => {
+        let text = postsLink.current.value;
+        props.createPost(text)
     }
 
     return (
         <div className={style.posts}>
             <div className={style.newPost}>
-                <textarea onChange={onPostChange}
-                    ref={link}
-                    value={props.profile.newPostText} />
-                <button onClick={createPost}>New post</button>
+                <textarea onChange={onUpdatePost}
+                    ref={postsLink}
+                    value={props.state.profile.newPostText} />
+                <button onClick={addPost}>New post</button>
             </div>
             {postList}
         </div>

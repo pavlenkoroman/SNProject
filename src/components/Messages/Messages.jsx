@@ -1,29 +1,27 @@
 import React from 'react';
 import style from './Messages.module.css';
 import Dialog from './Dialog/Dialog';
-import { newDialogActionCreator, updateDialogActionCreator } from '../../redux/state';
 
 const Messages = (props) => {
-
     let messageList = props.state.messages.messagesData.map(m => <Dialog id={m.id} userName={m.name} lastMessage={m.lastMessage}/>)
-
     let dialogLink = React.createRef();
 
-    let createDialog = () => {
+    let updateDialog = () => {
         let text = dialogLink.current.value;
-        props.dispatch(newDialogActionCreator(text))
+        props.onDialogChange(text)
     }
 
-    let onDialogChange = () => {
+    let addDialog = () => {
         let text = dialogLink.current.value;
-        props.dispatch(updateDialogActionCreator(text));
+        props.createDialog(text)
     }
-
+    
+   
     return (
         <div className={style.messages}>
             {messageList}
-            <textarea ref={dialogLink} onChange={onDialogChange}></textarea>
-            <button onClick={createDialog}>Tap</button>
+            <textarea ref={dialogLink} onChange={updateDialog}></textarea>
+            <button onClick={addDialog}>Tap</button>
         </div>
     )
 }
