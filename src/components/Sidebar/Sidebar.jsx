@@ -7,8 +7,7 @@ const Sidebar = function() {
       <ul>
         <li><NavLink to="/profile">Profile</NavLink></li>
         <li><NavLink to="/messages">Messages</NavLink></li>
-        <li><NavLink to="/news">News</NavLink></li>
-        <li><NavLink to="/settings">Settings</NavLink></li>
+        <li><NavLink to="/users">Users</NavLink></li>
       </ul>
     </div>
     );

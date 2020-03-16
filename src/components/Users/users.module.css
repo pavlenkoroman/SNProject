@@ -1,0 +1,8 @@
+.users {
+    background-color: #edeef0;
+    width: 640px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    border-radius: 4%;
+}

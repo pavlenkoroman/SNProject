@@ -14,17 +14,23 @@ let initialState = {
 }
 
 const postsReducer = (state = initialState, action) => {
-
     switch (action.type) {
-        case NEW_POST:
-            let newPostData = { id: 7, name: 'Roman Pavlenko', message: action.postText, likesCounter: 0 };
-            state.postsData.push(newPostData);
-            return state;
+        case NEW_POST: {
+            let newPostData = {
+                id: 7,
+                name: 'Roman Pavlenko',
+                message: action.postText,
+                likesCounter: 0
+            };
+            return { ...state, postsData: [...state.postsData, newPostData], newPostText: '' };
 
-        case UPDATE_POST:
-            state.newPostText = action.newText;
-            return state;
+        }
+
+        case UPDATE_POST: {
+            return { ...state, newPostText: action.newText };
+        }
     }
+
     return state;
 
 }
