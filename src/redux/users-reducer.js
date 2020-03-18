@@ -1,11 +1,14 @@
 let FOLLOW = "FOLLOW";
-let UNFOLLOW = "UNFOLLOW"
-let SET_USERS = "SET_USERS"
+let UNFOLLOW = "UNFOLLOW";
+let SET_USERS = "SET_USERS";
+let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+let GET_TOTAL_USERS = "GET_TOTAL_USERS";
 
 let initialState = {
-    usersData: [
-    
-]
+    usersData: [],
+    totalUsers: 0,
+    onOnePage: 18,
+    currentPage: 1 
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -37,9 +40,18 @@ const usersReducer = (state = initialState, action) => {
 
         case SET_USERS: {
             return {
-                ...state, usersData: [
-                    ...state.usersData, ...action.users
-                ] 
+                ...state, usersData: action.users
+            }
+        }
+        case SET_CURRENT_PAGE: {
+            return {
+                ...state, currentPage: action.page
+            }
+        }
+
+        case GET_TOTAL_USERS: {
+            return {
+                ...state, totalUsers: action.totalUsers,
             }
         }
     }
@@ -64,6 +76,20 @@ export const setUsersAC = (users) => {
     return {
         type: SET_USERS,
         users
+    }
+}
+
+export const setPagesCounterAC = (page) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        page
+    }
+}
+
+export const getTotalUsersAC = (totalUsers) => {
+    return {
+        type: GET_TOTAL_USERS,
+        totalUsers
     }
 }
 

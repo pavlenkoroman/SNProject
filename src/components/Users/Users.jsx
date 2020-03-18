@@ -1,30 +1,40 @@
 import React from 'react';
 import style from './users.module.css'
 import User from './User/User';
-import * as axios from "axios"
 
-class Users extends React.Component {
+const Users = (props) => {
 
-   constructor(props) {
-      super(props);
+   let usersList = props.usersData.map(
+      user => <User avatar={user.photos.large} id={user.id} name={user.name} status={user.status} />
+   )
+   
+   let totalUsers = props.totalUsers
+   let onOnePage = props.onOnePage
+   let pagesCount = Math.ceil(totalUsers / onOnePage);
+   let pages = [];
 
-      axios.get("https://social-network.samuraijs.com/api/1.0/users")
-         .then(response => {
-            this.props.setUsers(response.data.items)
-         })
+   for (let i = 1; i <= pagesCount && i <= 10; i++) {
+      pages.push(i);
    }
 
-   render() {
-      let usersList = this.props.usersData.map(
-         user => <User avatar={user.photos.large} id={user.id} name={user.name} status={user.status} />
-      )
-      return (
+   let pagesList = pages.map(
+      page => { 
+      return( 
+      <span className={props.currentPage === page && style.active}
+      onClick={() => {
+         props.onPageClick(page)
+      }}>{page}</span>
+      )}
+   )
 
-         <div className={style.users}>{usersList}</div>
-      )
-
-   }
-
+   return(
+      <div>
+      <div className={style.users}>{usersList}</div>
+      <div className={style.paginator}>
+            {pagesList}
+      </div>
+      </div>
+   )
 }
 
 export default Users;

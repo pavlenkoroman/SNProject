@@ -6,3 +6,22 @@
     box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
     border-radius: 4%;
 }
+
+.paginator {
+    display:flex;
+    justify-content: space-between;   
+    text-decoration: none;
+    margin: 3%;
+}
+
+.paginator span:hover {
+    text-decoration: underline;
+}
+
+.paginator span {
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bold;
+}
