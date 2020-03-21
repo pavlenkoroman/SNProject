@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from './../../../avatar.jpg';
+import avatar from './../../../assets/noAvatar.png';
 import style from './ProfileInfo.module.css'
 import Loader from '../../../common/Loader/Loader';
 
@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
 
       <div className={style.mainItem}>
         <div className={style.avatar}>
-          <img src={props.profileInfo.photos.large} />
+          <img src={props.profileInfo.photos.large === null ? avatar : props.profileInfo.photos.large} />
         </div>
       </div>
 
