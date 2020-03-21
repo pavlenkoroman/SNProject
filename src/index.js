@@ -13,3 +13,5 @@ ReactDOM.render(
             <App />
         </Provider>
     </BrowserRouter>, document.getElementById('root'));
+
+    window.store = store

@@ -1,19 +1,17 @@
 import React from 'react';
 import style from './users.module.css'
 import User from './User/User';
-
+import noAvatar from './../../assets/noAvatar.png'
 const Users = (props) => {
-
    let usersList = props.usersData.map(
-      user => <User avatar={user.photos.large} id={user.id} name={user.name} status={user.status} />
+      user => <User avatar={user.photos.large === null ? noAvatar : user.photos.large} id={user.id} name={user.name} status={user.status} />
    )
-   
    let totalUsers = props.totalUsers
    let onOnePage = props.onOnePage
    let pagesCount = Math.ceil(totalUsers / onOnePage);
    let pages = [];
 
-   for (let i = 1; i <= pagesCount && i <= 10; i++) {
+   for (let i = 1; i <= pagesCount && i <= 15; i++) {
       pages.push(i);
    }
 

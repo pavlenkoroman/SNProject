@@ -9,11 +9,11 @@ const Posts = (props) => {
     let postsLink = React.createRef()
     let onUpdatePost = () => {
         let text = postsLink.current.value;
-        props.onPostChange(text)
+        props.updatePost(text)
     }
     let addPost = () => {
         let text = postsLink.current.value;
-        props.createPost(text)
+        props.newPost(text)
     }
     return (
         <div className={style.posts}>
