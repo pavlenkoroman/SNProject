@@ -1,29 +1,32 @@
 import React from 'react';
-import * as axios from "axios"
 import Users from './Users';
-import { usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader } from './../../redux/users-reducer';
+import { usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress } from './../../redux/users-reducer';
 import { connect } from 'react-redux';
 import Loader from '../../common/Loader/Loader';
-import { withRouter } from 'react-router-dom';
+import { usersAPI } from './../../api/api';
+import { initialUserlistRender } from '../../redux/users-reducer';
 
 class UsersCont extends React.Component {
 
     componentDidMount() {
-        this.props.toggleLoader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.onOnePage}&page=${this.props.currentPage}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.getTotalUsers(response.data.totalCount)
-                this.props.toggleLoader(false);
-            })
+
+        this.props.initialUserlistRender(this.props.onOnePage, this.props.currentPage);
+
+        // this.props.toggleLoader(true);
+        // getUsers(this.props.onOnePage, this.props.currentPage,)
+        //     .then(data => {
+        //         this.props.setUsers(data.items)
+        //         this.props.getTotalUsers(data.totalCount)
+        //         this.props.toggleLoader(false);
+        //     })
     }
 
     onPageClick = (page) => {
         this.props.toggleLoader(true);
         this.props.setPagesCounter(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.onOnePage}&page=${[page]}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
+        usersAPI.getUsers(this.props.onOnePage, page,)
+            .then(data => {
+                this.props.setUsers(data.items)
                 this.props.toggleLoader(false);
             })
     }
@@ -40,6 +43,10 @@ class UsersCont extends React.Component {
             onOnePage={this.props.onOnePage}
             currentPage={this.props.currentPage}
             onPageClick={this.onPageClick}
+            usersFollow={this.props.usersFollow}
+            usersUnfollow={this.props.usersUnfollow}
+            toggleFollowingProgress={this.props.toggleFollowingProgress}
+            followingInProgress = {this.props.followingInProgress}
         />
         </>
         )
@@ -53,12 +60,11 @@ let mapStateToProps = (state) => {
         totalUsers: state.users.totalUsers,
         onOnePage: state.users.onOnePage,
         currentPage: state.users.currentPage,
-        isLoading: state.users.isLoading
+        isLoading: state.users.isLoading,
+        followingInProgress: state.users.followingInProgress
     }
 
 }
 
-const UsersContainer = connect(mapStateToProps, {
-    usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader
-})(UsersCont);
-export default UsersContainer
+export default connect(mapStateToProps, {
+    usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress, initialUserlistRender})(UsersCont);

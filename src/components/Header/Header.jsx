@@ -3,7 +3,6 @@ import style from './Header.module.css'
 import { NavLink } from 'react-router-dom';
 import noAvatar from './../../assets/noAvatar.png'
 const Header = function (props) {
-  debugger
   return (
     <header>
       <div className={style.logo}>
@@ -13,13 +12,17 @@ const Header = function (props) {
 
 
       <div className={style.aboutUser}>
-      {props.loggedIn? <NavLink to={'/login'}>Login</NavLink> : <NavLink to={'/profile'}>
-  <div className={style.userName}> <NavLink to={'/profile'}>{props.authUserLogin}</NavLink></div>
-          <div className={style.avatarMini}><NavLink to={'/profile'}><img src={props.avatar === null ? noAvatar : props.avatar} alt="" /></NavLink></div>
-        </NavLink>}
-      
+        {props.isLoggedIn
+          ? <NavLink to={'/profile'}>
+            <div className={style.userName}> <NavLink to={'/profile'}>{props.authUserLogin}</NavLink></div>
+            <div className={style.avatarMini}><NavLink to={'/profile'}><img src={props.avatar === null ? noAvatar : props.avatar} alt="" /></NavLink></div>
+          </NavLink>
+          : <NavLink to={'/login'}>Login</NavLink>
 
-        
+        }
+
+
+
       </div>
     </header>
   );
