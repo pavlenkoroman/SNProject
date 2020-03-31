@@ -53,7 +53,6 @@ export const makeAuth = () => {
                 (data) => {
                     if (data.resultCode === 0){
                     dispatch(setAuthData(data.data.id, data.data.email, data.data.login, true))
-                    debugger
                     authAPI.extraAuthDataRequest(data.data.id)
                 .then(
                     (data) => {

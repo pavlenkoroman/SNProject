@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Messages.module.css';
 import Dialog from './Dialog/Dialog';
-import { Redirect } from 'react-router-dom';
 
 const Messages = (props) => {
     let messageList = props.messagesData.map(m => <Dialog id={m.id} userName={m.name} lastMessage={m.lastMessage} />)
@@ -17,15 +16,12 @@ const Messages = (props) => {
         props.createDialog(text)
     }
 
-
     return (
-        props.isLoggedIn
-            ? <div className={style.messages}>
+            <div className={style.messages}>
                 {messageList}
                 <textarea ref={dialogLink} onChange={updateDialog} value={props.newDialogText}></textarea>
                 <button onClick={addDialog}>Tap</button>
             </div>
-            : <Redirect to='/login' />
     )
 }
 

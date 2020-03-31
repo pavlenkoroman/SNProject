@@ -9,7 +9,6 @@ class HeaderContainer extends React.Component {
   }
 
   componentDidMount() {
-    debugger
     this.props.makeAuth()
     } 
 }
