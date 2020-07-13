@@ -2,6 +2,7 @@ import React from 'react';
 import avatar from './../../../assets/noAvatar.png';
 import style from './ProfileInfo.module.css'
 import Loader from '../../../common/Loader/Loader';
+import Status from './status';
 
 const ProfileInfo = (props) => {
   if (!props.profileInfo) {
@@ -27,8 +28,13 @@ const ProfileInfo = (props) => {
 
             <div className={style.infoItem}>
 
-              <span className={style.info}>Looking for a job:</span>
-              <span>{props.profileInfo.lookingForAJob === true ? '+' : '-'}</span>
+             {/* <Status statusText={props.statusText} updateStatus={props.updateStatus}/> */}
+
+            </div>
+
+            <div className={style.infoItem}>
+
+              <div className={style.info}>Looking for a job: <span>{props.profileInfo.lookingForAJob === true ? '+' : '-'}</span> </div>
 
             </div>
 

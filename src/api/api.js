@@ -43,3 +43,16 @@ export const authAPI = {
         })
 }
 }
+
+export const profileAPI = {
+    getStatus(userID) {
+        return instance.get(`profile/status/` + userID)
+        .then((response) => {
+            return response
+        })
+    },
+
+    sendStatus(statusText) {
+        return instance.put(`profile/status`, { status: statusText })
+    }
+}

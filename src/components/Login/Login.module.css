@@ -1,0 +1,9 @@
+.loginForm input , .loginForm button{
+    margin: 10px;
+    padding: 10px;
+    
+}
+
+.loginForm input{
+  outline: none;  
+}

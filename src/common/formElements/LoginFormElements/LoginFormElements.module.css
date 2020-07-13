@@ -1,0 +1,21 @@
+.error {
+    border: none;
+    border: 1px solid red;
+}
+
+.hint{
+    margin-left: 10px;
+    padding: 0;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 30px;
+    border: 1px solid red;
+}
+
+.hint::after {
+    border: 20px solid transparent;
+    border-right: 20px solid red;
+}
