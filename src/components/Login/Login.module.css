@@ -5,5 +5,13 @@
 }
 
 .loginForm input{
-  outline: none;  
+    border: none;
+    outline: none;
+}
+
+.formValidation {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid red;
+    color: red;
 }

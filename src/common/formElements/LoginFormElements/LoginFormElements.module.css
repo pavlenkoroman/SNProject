@@ -1,6 +1,6 @@
 .error {
     border: none;
-    border: 1px solid red;
+    outline: 1px solid red;
 }
 
 .hint{

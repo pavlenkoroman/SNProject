@@ -15,9 +15,10 @@ class ProfileCont extends React.Component {
     }
 
     componentDidMount() {
+        debugger
         let userID = this.props.match.params.userID;
         if (!userID) {
-            userID = 6566;
+            userID = this.props.loggedInUserId;
         }
 
         this.props.getStatus(userID)
@@ -29,7 +30,9 @@ class ProfileCont extends React.Component {
 let mapStateToProps = (state) => {
     return {
         profileInfo: state.profile.profileInfo,
-        statusText: state.profile.statusText
+        statusText: state.profile.statusText,
+        loggedInUserId: state.auth.id,
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 

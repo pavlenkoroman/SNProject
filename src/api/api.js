@@ -1,10 +1,11 @@
 import * as axios from 'axios';
+import { makeAuth, setAuthData } from '../redux/auth-reducer';
 
 let instance = axios.create({
     withCredentials: true,
     baseURL : `https://social-network.samuraijs.com/api/1.0/`,
     headers: {
-        "API-KEY": "03851283-f89c-4ad8-9452-73b1bf363566"
+        "API-KEY": "c2ec56da-8cc1-4d93-8145-67bc7c8642d9"
     }
 });
 
@@ -36,12 +37,14 @@ export const authAPI = {
         })
     },
 
-    extraAuthDataRequest (authUserID) {
-        return instance.get(`profile/` + authUserID)
-        .then((response) => {
-            return response.data
-        })
-}
+    loginRequest(email, password, rememberMe) {
+        return instance.post('auth/login', {email, password, rememberMe})
+    },
+
+    logoutRequest() {
+        return instance.delete('auth/login')
+    }    
+
 }
 
 export const profileAPI = {
