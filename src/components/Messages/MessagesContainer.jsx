@@ -3,11 +3,12 @@ import Messages from './Messages';
 import {connect} from 'react-redux';
 import {authWithRedirect} from '../../hoc/authRedirect'
 import {compose} from 'redux'
+import { getMessagesData, getNewDialogText } from '../../redux/messages-selectors';
 
 let mapStateToProps = (state) => {
     return {
-        messagesData: state.messages.messagesData,
-        newDialogText: state.messages.newDialogText,
+        messagesData: getMessagesData(state),
+        newDialogText: getNewDialogText(state),
     }
 }
 
@@ -18,9 +19,6 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
-// let redirectWithAuth = authWithRedirect(Messages)
-
-// const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(redirectWithAuth)
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),

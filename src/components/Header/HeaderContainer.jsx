@@ -7,10 +7,6 @@ class HeaderContainer extends React.Component {
   render() {
     return <Header {...this.props} />
   }
-
-  componentDidMount() {
-    this.props.makeAuth()
-    } 
 }
 
 let mapStateToProps = (state) => {

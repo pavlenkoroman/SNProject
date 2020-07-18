@@ -32,7 +32,7 @@ export const setAuthData = (id, email, login, isLoggedIn) => {
 export const makeAuth = () => {
     return (dispatch) => {
        
-        authAPI.authRequest()
+       return authAPI.authRequest()
             .then(
                 (response) => {
                     if (response.resultCode === 0){

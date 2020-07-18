@@ -3,13 +3,27 @@ import style from './App.module.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import UsersContainer from './components/Users/UsersContainer'
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
+import {connect} from 'react-redux';
+import { InitializeApp } from './redux/app-reducer'
+import { compose } from 'redux';
+import Loader from './common/Loader/Loader';
+import { getInitializationInfo } from './redux/app-selectors';
 
-function App(props) {
-  return (
+class App extends React.Component {
+
+  componentDidMount() {
+    this.props.InitializeApp()
+    } 
+
+  render() {
+    if (!this.props.initialized)
+    {return <Loader/>}
+
+    return (
     <div className={style.appWrapper}>
       <HeaderContainer />
 
@@ -22,7 +36,15 @@ function App(props) {
       </div>
 
     </div>
-  );
+    )}
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    initialized: getInitializationInfo(state)
+  }
+}
+
+export default compose (
+  withRouter,
+  connect(mapStateToProps, {InitializeApp}))(App)

@@ -5,20 +5,17 @@ import { connect } from 'react-redux';
 import Loader from '../../common/Loader/Loader';
 import { usersAPI } from './../../api/api';
 import { initialUserlistRender } from '../../redux/users-reducer';
+import {
+    getUsersData, getUserlist, getUsersOnOnePage,
+    getCurrentPageNumber, getIsLoading, getFollowingProgressInfo
+}
+    from '../../redux/userlist-selectors';
 
 class UsersCont extends React.Component {
 
     componentDidMount() {
 
         this.props.initialUserlistRender(this.props.onOnePage, this.props.currentPage);
-
-        // this.props.toggleLoader(true);
-        // getUsers(this.props.onOnePage, this.props.currentPage,)
-        //     .then(data => {
-        //         this.props.setUsers(data.items)
-        //         this.props.getTotalUsers(data.totalCount)
-        //         this.props.toggleLoader(false);
-        //     })
     }
 
     onPageClick = (page) => {
@@ -36,35 +33,36 @@ class UsersCont extends React.Component {
 
 
         return (
-        <>
-        {this.props.isLoading === true ? <Loader/> : null}
-        <Users totalUsers={this.props.totalUsers}
-            usersData={this.props.usersData}
-            onOnePage={this.props.onOnePage}
-            currentPage={this.props.currentPage}
-            onPageClick={this.onPageClick}
-            usersFollow={this.props.usersFollow}
-            usersUnfollow={this.props.usersUnfollow}
-            toggleFollowingProgress={this.props.toggleFollowingProgress}
-            followingInProgress = {this.props.followingInProgress}
-        />
-        </>
+            <>
+                {this.props.isLoading === true ? <Loader /> : null}
+                <Users totalUsers={this.props.totalUsers}
+                    usersData={this.props.usersData}
+                    onOnePage={this.props.onOnePage}
+                    currentPage={this.props.currentPage}
+                    onPageClick={this.onPageClick}
+                    usersFollow={this.props.usersFollow}
+                    usersUnfollow={this.props.usersUnfollow}
+                    toggleFollowingProgress={this.props.toggleFollowingProgress}
+                    followingInProgress={this.props.followingInProgress}
+                />
+            </>
         )
     }
-    
+
 }
 
 let mapStateToProps = (state) => {
     return {
-        usersData: state.users.usersData,
-        totalUsers: state.users.totalUsers,
-        onOnePage: state.users.onOnePage,
-        currentPage: state.users.currentPage,
-        isLoading: state.users.isLoading,
-        followingInProgress: state.users.followingInProgress
+        usersData: getUsersData(state),
+        totalUsers: getUserlist(state),
+        onOnePage: getUsersOnOnePage(state),
+        currentPage: getCurrentPageNumber(state),
+        isLoading: getIsLoading(state),
+        followingInProgress: getFollowingProgressInfo(state),
     }
 
 }
 
 export default connect(mapStateToProps, {
-    usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress, initialUserlistRender})(UsersCont);
+    usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress, initialUserlistRender
+})(UsersCont);
