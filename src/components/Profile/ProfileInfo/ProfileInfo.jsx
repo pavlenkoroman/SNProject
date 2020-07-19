@@ -3,6 +3,7 @@ import avatar from './../../../assets/noAvatar.png';
 import style from './ProfileInfo.module.css'
 import Loader from '../../../common/Loader/Loader';
 import Status from './status';
+import StatusHook from './StatusHook';
 
 const ProfileInfo = (props) => {
   if (!props.profileInfo) {
@@ -28,7 +29,7 @@ const ProfileInfo = (props) => {
 
             <div className={style.infoItem}>
 
-             {/* <Status statusText={props.statusText} updateStatus={props.updateStatus}/> */}
+              <StatusHook statusText={props.statusText} updateStatus={props.updateStatus}/>
 
             </div>
 

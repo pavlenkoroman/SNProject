@@ -26,7 +26,7 @@ const postsReducer = (state = initialState, action) => {
                 message: action.postText,
                 likesCounter: 0
             };
-            return { ...state, postsData: [...state.postsData, newPostData]};
+            return { ...state, postsData: [...state.postsData, newPostData] };
 
         }
 
@@ -94,8 +94,9 @@ export const updateStatus = (statusText) => {
         profileAPI.sendStatus(statusText)
             .then(
                 (response) => {
-                    if (response.resultCode === 0) 
-                    dispatch(setUserStatus(statusText))
+                    if (response.data.resultCode === 0) {
+                        dispatch(setUserStatus(statusText))
+                    }
                 }
             )
     }
