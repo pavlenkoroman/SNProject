@@ -1,62 +1,40 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form'
-class Status extends React.Component {
-    state = {
-        editMode: false,
-        localStatus: this.props.statusText
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+const Status = (props) => {
+
+    let [editMode, setEditMode] = useState(false)
+
+    let [statusText, setStatusText] = useState(props.statusText)
+
+    useEffect(() => {
+        setStatusText(props.statusText)
+    }, [props.statusText])
+
+    const activateEditMode = () => [
+        setEditMode(true)
+    ]
+
+    const deactivateEditMode = () => {
+        setEditMode(false)
+        props.updateStatus(statusText)
     }
 
-    enableEditMode = () => {
-        this.setState({
-            editMode: true
-        })
+    const onStatusChange = (e) => {
+        setStatusText(e.currentTarget.value)
     }
 
-    disableEditMode = () => {
-        this.setState({
-            editMode: false
-        })
-        this.props.updateStatus(this.state.localStatus)
-    }
-
-    onStatusChange = (e) => {
-        this.setState({
-            localStatus: e.currentTarget.value
-        })
-    }
-
-
-
-    componentDidUpdate = (prevProps, prevState) => {
-        if (prevState.localStatus !== this.state.localStatus) {
-            this.setState({
-                localStatus: this.props.status
-            })
-        }
-    }
-
-    render() {
-        if (this.state.editMode === false) {
-            return <div className="statusText" onDoubleClick={this.enableEditMode}>{!this.props.statusText ? "you have no status" : this.props.statusText}</div>
-        } else {
-            return <StatusInput value={this.state.localStatus} onBlur={this.disableEditMode}/>
-        }
-    }
-}
-const StatusInput = (props) => {
     return (
-        <ReduxFormStatus />
+        <div>
+            {!editMode && <div>
+                <span onClick={activateEditMode}>{props.statusText? props.statusText : "you have no status"}</span>
+            </div>}
+
+            {editMode && <input autoFocus={true} onBlur={deactivateEditMode} onChange={onStatusChange} value={statusText}></input>}
+        </div>
     )
 }
 
-const StatusForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <Field component={"input"} type={"text"} name={"userStatus"}/>
-        </form>
-    )
-}
-
-const ReduxFormStatus = reduxForm({ form: 'userStatus' })(StatusForm)
-
-export default Status
+export default Status;

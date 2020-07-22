@@ -17,7 +17,7 @@ let initialState = {
     statusText: null
 }
 
-const postsReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case NEW_POST: {
             let newPostData = {
@@ -102,4 +102,4 @@ export const updateStatus = (statusText) => {
     }
 }
 
-export default postsReducer;
+export default profileReducer;

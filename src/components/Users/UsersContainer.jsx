@@ -9,13 +9,13 @@ import {
     getUsersData, getUserlist, getUsersOnOnePage,
     getCurrentPageNumber, getIsLoading, getFollowingProgressInfo
 }
-    from '../../redux/userlist-selectors';
+    from '../../redux/users-selectors';
 
 class UsersCont extends React.Component {
 
     componentDidMount() {
 
-        this.props.initialUserlistRender(this.props.onOnePage, this.props.currentPage);
+      this.props.initialUserlistRender(this.props.onOnePage, this.props.currentPage);
     }
 
     onPageClick = (page) => {

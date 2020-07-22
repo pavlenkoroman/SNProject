@@ -4,7 +4,8 @@ import Post from './Post/Post';
 import { Field, reduxForm } from 'redux-form';
 
 
-const Posts = (props) => {
+const Posts = React.memo((props) => {
+    console.log('render')
     let postList = props.postsData.map(el => <Post userName={el.name} message={el.message} likesCounter={el.likesCounter} />)
 
     let addPost = (values) => {
@@ -18,7 +19,7 @@ const Posts = (props) => {
             {postList}
         </div>
     )
-}
+})
 
 let postForm = (props) => {
     return (
