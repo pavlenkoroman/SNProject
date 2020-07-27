@@ -1,0 +1,18 @@
+.paginator {
+    display:flex;
+    justify-content: space-between;   
+    text-decoration: none;
+    margin: 3%;
+}
+
+.paginator span:hover {
+    text-decoration: underline;
+}
+
+.paginator span {
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bold;
+}

@@ -1,12 +1,13 @@
 import { usersAPI } from './../api/api'
 
-let FOLLOW = "FOLLOW";
-let UNFOLLOW = "UNFOLLOW";
-let SET_USERS = "SET_USERS";
-let SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-let GET_TOTAL_USERS = "GET_TOTAL_USERS";
-let TOGGLE_LOADER = "TOGGLE_LOADER";
-let TOGGLE_FOLLOWING_PROGRESS = "TOGGLE_FOLLOWING_PROGRESS";
+let FOLLOW = "USERS_REDUCER_FOLLOW";
+let UNFOLLOW = "USERS_REDUCER_UNFOLLOW";
+let SET_USERS = "USERS_REDUCER_SET_USERS";
+let SET_CURRENT_PAGE = "USERS_REDUCER_SET_CURRENT_PAGE";
+let GET_TOTAL_USERS = "USERS_REDUCER_GET_TOTAL_USERS";
+let TOGGLE_LOADER = "USERS_REDUCER_TOGGLE_LOADER";
+let TOGGLE_FOLLOWING_PROGRESS = "USERS_REDUCER_TOGGLE_FOLLOWING_PROGRESS";
+let FOLLOW_UNFOLLOW = "USERS_REDUCER_FOLLOW_UNFOLLOW"
 
 let initialState = {
     usersData: [],
@@ -79,14 +80,14 @@ const usersReducer = (state = initialState, action) => {
     return state;
 }
 
-export const usersFollow = (userId) => {
+export const follow = (userId) => {
     return {
         type: FOLLOW,
         userId
     }
 }
 
-export const usersUnfollow = (userId) => {
+export const unfollow = (userId) => {
     return {
         type: UNFOLLOW,
         userId
@@ -140,5 +141,28 @@ export const initialUserlistRender = (onOnePage, currentPage) => {
             })
     }
 }
+
+export const followUnfollowFlow = async (dispatch, id, actionCreator, APIMethod) => {
+        dispatch(toggleFollowingProgress(true, id))
+        let response = await APIMethod;
+        if (response.data.resultCode == 0) {
+            dispatch(actionCreator(id));
+        }
+        dispatch(toggleFollowingProgress(false, id))
+}
+
+export const followProcess = (id) => {
+    return async (dispatch) => {
+        followUnfollowFlow(dispatch, id, follow, usersAPI.followRequest(id))
+    }
+}
+
+export const unfollowProcess = (id) => {
+    return async (dispatch) => {
+        followUnfollowFlow(dispatch, id, unfollow, usersAPI.unfollowRequest(id))
+    }
+}
+
+
 
 export default usersReducer;

@@ -1,4 +1,4 @@
-const NEW_DIALOG = "NEW-DIALOG";
+const NEW_DIALOG = "DIALOGS_REDUCER_NEW_DIALOG";
 
 let initialState = {
     messagesData: [

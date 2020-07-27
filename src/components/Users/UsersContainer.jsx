@@ -1,6 +1,6 @@
 import React from 'react';
 import Users from './Users';
-import { usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress } from './../../redux/users-reducer';
+import {setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress, followProcess, unfollowProcess } from './../../redux/users-reducer';
 import { connect } from 'react-redux';
 import Loader from '../../common/Loader/Loader';
 import { usersAPI } from './../../api/api';
@@ -18,14 +18,12 @@ class UsersCont extends React.Component {
       this.props.initialUserlistRender(this.props.onOnePage, this.props.currentPage);
     }
 
-    onPageClick = (page) => {
+    onPageClick = async (page) => {
         this.props.toggleLoader(true);
         this.props.setPagesCounter(page)
-        usersAPI.getUsers(this.props.onOnePage, page,)
-            .then(data => {
+        let data = await usersAPI.getUsers(this.props.onOnePage, page,)
                 this.props.setUsers(data.items)
                 this.props.toggleLoader(false);
-            })
     }
 
 
@@ -40,10 +38,10 @@ class UsersCont extends React.Component {
                     onOnePage={this.props.onOnePage}
                     currentPage={this.props.currentPage}
                     onPageClick={this.onPageClick}
-                    usersFollow={this.props.usersFollow}
-                    usersUnfollow={this.props.usersUnfollow}
-                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                     followingInProgress={this.props.followingInProgress}
+                    followProcess={this.props.followProcess}
+                    unfollowProcess={this.props.unfollowProcess}
+                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                 />
             </>
         )
@@ -63,6 +61,5 @@ let mapStateToProps = (state) => {
 
 }
 
-export default connect(mapStateToProps, {
-    usersFollow, usersUnfollow, setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress, initialUserlistRender
-})(UsersCont);
+export default connect(mapStateToProps, 
+    { setUsers, setPagesCounter, getTotalUsers, toggleLoader, initialUserlistRender, toggleFollowingProgress, followProcess, unfollowProcess})(UsersCont);

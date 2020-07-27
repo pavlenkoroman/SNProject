@@ -1,6 +1,6 @@
 import { usersAPI, profileAPI } from './../api/api'
 
-const NEW_POST = "NEW-POST";
+const NEW_POST = "PROFILE_REDUCER_NEW_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_USER_STATUS = "SET_USER_STATUS"
 
@@ -69,36 +69,25 @@ export const setUserStatus = (statusText) => {
 }
 
 export const getProfile = (userID) => {
-    return (dispatch) => {
-        usersAPI.getProfileRequest(userID)
-            .then(
-                (response) => {
-                    dispatch(setUserProfile(response.data));
-                }
-            )
+    return async (dispatch) => {
+        let response = await usersAPI.getProfileRequest(userID)
+        dispatch(setUserProfile(response.data));
     }
 }
 
 export const getStatus = (userID) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userID)
-            .then(
-                (response) => {
-                    dispatch(setUserStatus(response.data))
-                })
+    return async (dispatch) => {
+        let response = await profileAPI.getStatus(userID)
+        dispatch(setUserStatus(response.data))
     }
 }
 
 export const updateStatus = (statusText) => {
-    return (dispatch) => {
-        profileAPI.sendStatus(statusText)
-            .then(
-                (response) => {
-                    if (response.data.resultCode === 0) {
-                        dispatch(setUserStatus(statusText))
-                    }
-                }
-            )
+    return async (dispatch) => {
+        let response = await profileAPI.sendStatus(statusText)
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(statusText))
+        }
     }
 }
 
