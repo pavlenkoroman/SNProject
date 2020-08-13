@@ -42,7 +42,6 @@ export const makeAuth = () => {
 export const login = (email, password, rememberMe) => {
     return async (dispatch) => {
         let response = await authAPI.loginRequest(email, password, rememberMe)
-        debugger
         if (response.data.resultCode === 0) {
             dispatch(makeAuth())
         }

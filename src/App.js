@@ -3,15 +3,16 @@ import style from './App.module.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import UsersContainer from './components/Users/UsersContainer'
-import { Route, withRouter, Router } from 'react-router-dom';
+import {Route, withRouter, Router, BrowserRouter} from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
-import { connect } from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import { InitializeApp } from './redux/app-reducer'
 import { compose } from 'redux';
 import Loader from './common/Loader/Loader';
 import { getInitializationInfo } from './redux/app-selectors';
+import store from "./redux/redux-store";
 
 class App extends React.Component {
 
@@ -45,6 +46,18 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default compose(
+let AppContainer = compose(
   withRouter,
   connect(mapStateToProps, { InitializeApp }))(App);
+
+let MainApp = (props) => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer />
+            </Provider>
+        </BrowserRouter>
+    )
+}
+
+export default MainApp;

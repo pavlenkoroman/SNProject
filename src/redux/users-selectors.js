@@ -18,6 +18,10 @@ export const getIsLoading = (state) => {
     return state.users.isLoading
 }
 
-export const getFollowingProgressInfo = (state) => {
+export const getPaginatorLength = (state) => {
+    return state.users.paginatorLength
+}
+
+export const getFollowingInProgress = (state) => {
     return state.users.followingInProgress
 }

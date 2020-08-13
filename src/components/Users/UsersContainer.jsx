@@ -1,20 +1,19 @@
 import React from 'react';
 import Users from './Users';
-import {setUsers, setPagesCounter, getTotalUsers, toggleLoader, toggleFollowingProgress, followProcess, unfollowProcess } from './../../redux/users-reducer';
+import {setUsers, setPagesCounter, getTotalUsers, toggleLoader, followProcess, unfollowProcess } from './../../redux/users-reducer';
 import { connect } from 'react-redux';
 import Loader from '../../common/Loader/Loader';
 import { usersAPI } from './../../api/api';
-import { initialUserlistRender } from '../../redux/users-reducer';
+import {initialUserlistRender} from '../../redux/users-reducer';
 import {
     getUsersData, getUserlist, getUsersOnOnePage,
-    getCurrentPageNumber, getIsLoading, getFollowingProgressInfo
+    getCurrentPageNumber, getIsLoading, getPaginatorLength, getFollowingInProgress
 }
     from '../../redux/users-selectors';
 
 class UsersCont extends React.Component {
 
     componentDidMount() {
-
       this.props.initialUserlistRender(this.props.onOnePage, this.props.currentPage);
     }
 
@@ -38,10 +37,10 @@ class UsersCont extends React.Component {
                     onOnePage={this.props.onOnePage}
                     currentPage={this.props.currentPage}
                     onPageClick={this.onPageClick}
-                    followingInProgress={this.props.followingInProgress}
                     followProcess={this.props.followProcess}
                     unfollowProcess={this.props.unfollowProcess}
-                    toggleFollowingProgress={this.props.toggleFollowingProgress}
+                    paginatorLength = {this.props.paginatorLength}
+                    followingInProgress = {this.props.followingInProgress}
                 />
             </>
         )
@@ -56,10 +55,11 @@ let mapStateToProps = (state) => {
         onOnePage: getUsersOnOnePage(state),
         currentPage: getCurrentPageNumber(state),
         isLoading: getIsLoading(state),
-        followingInProgress: getFollowingProgressInfo(state),
+        paginatorLength: getPaginatorLength(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 
 }
 
 export default connect(mapStateToProps, 
-    { setUsers, setPagesCounter, getTotalUsers, toggleLoader, initialUserlistRender, toggleFollowingProgress, followProcess, unfollowProcess})(UsersCont);
+    { setUsers, setPagesCounter, getTotalUsers, toggleLoader, initialUserlistRender,  followProcess, unfollowProcess})(UsersCont);

@@ -6,8 +6,7 @@ let SET_USERS = "USERS_REDUCER_SET_USERS";
 let SET_CURRENT_PAGE = "USERS_REDUCER_SET_CURRENT_PAGE";
 let GET_TOTAL_USERS = "USERS_REDUCER_GET_TOTAL_USERS";
 let TOGGLE_LOADER = "USERS_REDUCER_TOGGLE_LOADER";
-let TOGGLE_FOLLOWING_PROGRESS = "USERS_REDUCER_TOGGLE_FOLLOWING_PROGRESS";
-let FOLLOW_UNFOLLOW = "USERS_REDUCER_FOLLOW_UNFOLLOW"
+let FOLLOWING_IN_PROGRESS = "USERS_FOLLOWING_IN_PROGRESS";
 
 let initialState = {
     usersData: [],
@@ -15,7 +14,8 @@ let initialState = {
     onOnePage: 18,
     currentPage: 1,
     isLoading: true,
-    followingInProgress: []
+    followingInProgress: [],
+    paginatorLength: 10
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -68,12 +68,11 @@ const usersReducer = (state = initialState, action) => {
             }
         }
 
-        case TOGGLE_FOLLOWING_PROGRESS: {
+        case FOLLOWING_IN_PROGRESS: {
             return {
-                ...state,
-                followingInProgress: action.followingInProgress
-                    ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                ...state, followingInProgress: action.isFollowing
+                    ? [...state.followingInProgress, action.id]
+                    : state.followingInProgress.filter(id => id != action.id)
             }
         }
     }
@@ -115,18 +114,18 @@ export const getTotalUsers = (totalUsers) => {
     }
 }
 
+export const toggleFollowingProgress = (isFollowing, id) => {
+    return {
+        type: FOLLOWING_IN_PROGRESS,
+        isFollowing,
+        id
+    }
+}
+
 export const toggleLoader = (isLoading) => {
     return {
         type: TOGGLE_LOADER,
         isLoading
-    }
-}
-
-export const toggleFollowingProgress = (followingInProgress, userId) => {
-    return {
-        type: TOGGLE_FOLLOWING_PROGRESS,
-        followingInProgress,
-        userId
     }
 }
 
